@@ -1,0 +1,19 @@
+Web UI is available at:
+
+For the HDFS service (Name node):
+http://localhost:9870/
+
+For the HDFS service (Secondary name node):
+http://localhost:9868/
+
+For the HDFS service (Data nodes):
+http://localhost:9864/
+
+For the MapReduce service:
+http://localhost:19888/
+
+For the YARN service (Resource Manager):
+http://localhost:8088/
+
+For the YARN service (Nodes Manager):
+http://localhost:8042/
