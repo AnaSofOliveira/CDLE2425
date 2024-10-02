@@ -12,7 +12,7 @@ function usage() {
 	exit
 }
 
-if [[ $# -lt 1 ]]; then
+if [[ $# -lt 3 ]]; then
 	usage
 else
 	case "$1" in
@@ -29,11 +29,22 @@ else
 		*)
 			usage
 	esac
+	NUMBER_REDUCERS=$2
+	case "$3" in
+		"Bzip2")
+			CODEC=BZip
+			;;
+		"Gzip")
+			CODEC=Gzip
+			;;
+		*)
+			usage
+	esac
 fi
 
 source ./usage.sh
 
-NUMBER_REDUCERS=2
+# NUMBER_REDUCERS=2
 NUMBER_DISPLAY_LINES=15
 
 #CORPUS_NAME=gutenberg-mixed
@@ -71,7 +82,7 @@ else
 	${CMD}
 fi
 
-ARGS="${INPUT_DIRECTORY} ${OUTPUT_DIRECTORY} ${NUMBER_REDUCERS}"
+ARGS="${INPUT_DIRECTORY} ${OUTPUT_DIRECTORY} ${NUMBER_REDUCERS} ${CODEC}"
 
 echo "Exporting classpath..."
 export HADOOP_CLASSPATH=${JAR_FILE}

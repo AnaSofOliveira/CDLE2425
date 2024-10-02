@@ -12,11 +12,23 @@ public class WordCountApplication {
 	
 	public static void main(String[] args) throws Exception {
 		if ( args.length<2 ) {
-			System.err.println( "hadoop ... <input path> <output path> [number of reducers]" );
+			System.err.println( "hadoop ... <input path> <output path> [number of reducers] [codec]" );
 			System.exit(-1);
 		}
+
 		
-		Job job = Job.getInstance( new Configuration() );
+		Configuration conf = new Configuration();
+		if(args[3].equals("Gzip")){
+			conf.set("mapreduce.output.fileoutputformat.compress", "true");
+			conf.set("mapreduce.output.fileoutputformat.compress.codec", "org.apache.hadoop.io.compress.GzipCodec");
+		}else if(args[3].equals("Bzip2")){
+			conf.set("mapreduce.output.fileoutputformat.compress", "true");
+			conf.set("mapreduce.output.fileoutputformat.compress.codec", "org.apache.hadoop.io.compress.BZip2Codec");
+		}else{
+			conf.set("mapreduce.output.fileoutputformat.compress", "false");
+		}
+		
+		Job job = Job.getInstance( conf );
 		
 		job.setJarByClass( WordCountApplication.class );
 		job.setJobName( "Word Count Ver 1" );
