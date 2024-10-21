@@ -8,37 +8,27 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-public class WordCountApplication {
-	
-	public static void main(String[] args) throws Exception {
-		if ( args.length<2 ) {
-			System.err.println( "hadoop ... <input path> <output path> [number of reducers] [codec]" );
+public class WordCountMergeApplication {
+    
+    public static void main(String[] args) throws Exception {
+        
+        if ( args.length<2 ) {
+			System.err.println( "hadoop ... <input path> <output path> [number of reducers]" );
 			System.exit(-1);
 		}
 
-		
-		Configuration conf = new Configuration();
-		// if(args[3].equals("Gzip")){
-		// 	conf.set("mapreduce.output.fileoutputformat.compress", "true");
-		// 	conf.set("mapreduce.output.fileoutputformat.compress.codec", "org.apache.hadoop.io.compress.GzipCodec");
-		// }else if(args[3].equals("Bzip2")){
-		// 	conf.set("mapreduce.output.fileoutputformat.compress", "true");
-		// 	conf.set("mapreduce.output.fileoutputformat.compress.codec", "org.apache.hadoop.io.compress.BZip2Codec");
-		// }else{
-		// 	conf.set("mapreduce.output.fileoutputformat.compress", "false");
-		// }
-		
+        Configuration conf = new Configuration();
 		Job job = Job.getInstance( conf );
-		
-		job.setJarByClass( WordCountApplication.class );
-		job.setJobName( "Word Count Ver 1" );
-		
+
+        job.setJarByClass( WordCountMergeApplication.class );
+		job.setJobName( "Word Count Merge Version 1" );
+        
 		FileInputFormat.addInputPath( job, new Path(args[0]) );
 		FileOutputFormat.setOutputPath( job, new Path(args[1]) );
 		
-		job.setMapperClass( WordCountMapper.class );
-		job.setCombinerClass( WordCountReducer.class );
-		job.setReducerClass( WordCountReducer.class );
+		job.setMapperClass( WordCountMergeMapper.class );
+		job.setCombinerClass( WordCountMergeReducer.class );
+		job.setReducerClass( WordCountMergeReducer.class );
 		
 		// Output types of map function
 		job.setMapOutputKeyClass( Text.class );
@@ -59,5 +49,5 @@ public class WordCountApplication {
 		job.setOutputValueClass( IntWritable.class );
 		
 		System.exit( job.waitForCompletion(true) ? 0 : 1 );
-	}
+    }
 }

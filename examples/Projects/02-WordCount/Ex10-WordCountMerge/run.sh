@@ -29,18 +29,18 @@ else
 		*)
 			usage
 	esac
+	NUMBER_REDUCERS=$2
 fi
 
 source ./usage.sh
 
-NUMBER_REDUCERS=2
+# NUMBER_REDUCERS=2
 NUMBER_DISPLAY_LINES=15
 
-#CORPUS_NAME=gutenberg-mixed
-#CORPUS_NAME=gutenberg-mixed
 
+#CORPUS_NAME=ex10/gutenberg-mixed
+#CORPUS_NAME=ex10/gutenberg-small
 CORPUS_NAME=random
-
 
 INPUT=${BASE_DIRECTORY}/input/${CORPUS_NAME}
 OUTPUT=${BASE_DIRECTORY}/output/${CORPUS_NAME}
