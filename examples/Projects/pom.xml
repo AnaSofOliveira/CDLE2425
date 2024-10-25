@@ -33,5 +33,6 @@
     <module>06-MapReduce</module>
     <module>07-OpenCV</module>
     <module>AP1-WordCount</module>
+    <module>AP2-WordCount</module>
   </modules>
 </project>
