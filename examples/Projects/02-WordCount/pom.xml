@@ -20,7 +20,6 @@
 
   <modules>
     <module>Ex10-WordCount-01</module>
-    <module>Ex10-WordCountMerge</module> 
     <module>Ex11-WordCount-02</module>
     <module>Ex12-WordCount-02-Lib</module> 
   </modules>
