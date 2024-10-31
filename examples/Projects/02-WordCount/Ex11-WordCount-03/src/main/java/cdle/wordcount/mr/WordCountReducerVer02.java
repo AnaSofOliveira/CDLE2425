@@ -10,14 +10,19 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import cdle.wordcount.mr.formaters.input.MyLogUtils;
 
-public class WordCountCombinerVer02
+public class WordCountReducerVer02
 		extends Reducer<Text, IntWritable, Text, IntWritable> {
 	
 	private static Log log;
 	
 	static {
 		Class<?> klass;
-		klass = WordCountCombinerVer02.class;
+		klass = org.apache.hadoop.mapreduce.Reducer.class;
+		
+		log = LogFactory.getLog( klass );
+		MyLogUtils.showDebugLevel( log, klass );
+		
+		klass = WordCountReducerVer02.class;
 		
 		log = LogFactory.getLog( klass );
 		MyLogUtils.showDebugLevel( log, klass );
@@ -30,13 +35,11 @@ public class WordCountCombinerVer02
     		throws IOException, InterruptedException {
     	
     	if ( log.isInfoEnabled() ) {
-    		String msg = String.format( "%s#setup(%s) called", WordCountCombinerVer02.class.getSimpleName(), context.getJobName() );
+    		String msg;
+    		msg = String.format( "%s#setup(%s) called", WordCountReducerVer02.class.getSimpleName(), context.getJobName() );
     		
     		log.info( msg );
-
-			log.error("---------------test------------------");
     		System.out.printf( "[INFO] %s\n", msg );
-			System.out.printf( "[INFO] %s\n", "---------------test------------------" );
 		}
     	super.setup( context );
 	}
@@ -53,18 +56,22 @@ public class WordCountCombinerVer02
 		this.result.set( sum );
 		
 		context.write(key, this.result );
+		
+		context.getCounter( WordCountUtils.Statistics.Distincts ).increment( 1 );
+		
+		if ( sum==1 ) {
+			context.getCounter( WordCountUtils.Statistics.Singletons ).increment( 1 );
+		}
 	}
 	
 	@Override
 	public void cleanup(Context context) 
 			throws IOException, InterruptedException {
 
-		if ( log.isDebugEnabled() ) {
-			String msg;
-			msg = String.format( "%s#cleanup(%s) called", WordCountCombinerVer02.class.getSimpleName(), context.getJobName() );
+		if ( log.isInfoEnabled() ) {
+			String msg = String.format( "%s#cleanup(%s) called", WordCountReducerVer02.class.getSimpleName(), context.getJobName() );
 			
-			log.info( msg );
-			
+    		log.info( msg );
     		System.out.printf( "[INFO] %s\n", msg );
 		}
 		

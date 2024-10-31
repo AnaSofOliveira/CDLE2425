@@ -2,7 +2,6 @@ package cdle.wordcount.mr;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -47,10 +46,6 @@ public class WordCountApplicationVer02
 		}		
 		
 		System.out.printf( "MyLogUtils.getLogFile() -> %s\n", MyLogUtils.getLogFile() );
-
-		Configuration conf;
-    	conf = getConf();
-		int n = conf.getInt("wordcount.case.ngram.size", 3);
 		
 		// Create a job
 		Job job = Job.getInstance( getConf() );
@@ -64,7 +59,7 @@ public class WordCountApplicationVer02
 		// Set map, reducer and combiner
 		job.setMapperClass( WordCountMapperVer02.class );
 		// -Dmapreduce.job.combine.class=...
-		job.setCombinerClass( WordCountCombinerVer02.class );
+		//job.setCombinerClass( WordCountCombinerVer02.class );
 		job.setReducerClass( WordCountReducerVer02.class );
 		
 		
@@ -100,9 +95,9 @@ public class WordCountApplicationVer02
 			Counter singletonsCounter = job.getCounters().findCounter( WordCountUtils.Statistics.Singletons );
 			Counter totalCounter = job.getCounters().findCounter( WordCountUtils.Statistics.TotalWords );
 			
-			System.out.printf( "Number of distinct %d-grams: %d\n",n, distinctsCounter.getValue() );
-			System.out.printf( "Number of singletons %d-grams: %d\n",n, singletonsCounter.getValue() );
-			System.out.printf( "Number of total %d-grams: %d\n",n, totalCounter.getValue() );
+			System.out.printf( "Number of distinct n-grams: %d\n", distinctsCounter.getValue() );
+			System.out.printf( "Number of singletons n-grams: %d\n", singletonsCounter.getValue() );
+			System.out.printf( "Number of total n-grams: %d\n", totalCounter.getValue() );
 		}
 		else {
 			System.out.printf( "Job failed!\n" );

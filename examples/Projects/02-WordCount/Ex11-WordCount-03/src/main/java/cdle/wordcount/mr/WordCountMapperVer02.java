@@ -2,13 +2,10 @@ package cdle.wordcount.mr;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
@@ -44,8 +41,6 @@ public class WordCountMapperVer02
     
     private boolean caseSensitive;
     private Set<String> patternsToSkip = new HashSet<String>();
-
-	private int n;
         
     @Override
     public void setup(Context context) 
@@ -60,26 +55,17 @@ public class WordCountMapperVer02
     	
     	Configuration conf;
     	conf = context.getConfiguration();
-
-		this.n = conf.getInt("wordcount.case.ngram.size", 2);
-		if ( log.isDebugEnabled() ) {
-    		String msg = String.format( "wordcount.case.ngram.size=%d", this.n );
-    		log.debug( this.n );
-    		log.debug( msg );
-    		System.out.printf( "[DEBUG] %s\n", msg );
-		}
     	
-    	this.caseSensitive = conf.getBoolean( "wordcount.case.sensitive", false );
+    	this.caseSensitive = conf.getBoolean( "wordcount.case.sensitive", true );
     	if ( log.isDebugEnabled() ) {
     		String msg = String.format( "wordcount.case.sensitive=%b", this.caseSensitive );
     		
     		log.debug( msg );
     		System.out.printf( "[DEBUG] %s\n", msg );
-			
 		}
-
+    	
     	boolean skipPatterns;
-    	skipPatterns = conf.getBoolean( "wordcount.skip.patterns", true);
+    	skipPatterns = conf.getBoolean( "wordcount.skip.patterns", false);
     	if ( log.isDebugEnabled() ) {
     		String msg = String.format( "wordcount.skip.patterns=%b", skipPatterns );
     		
@@ -126,45 +112,14 @@ public class WordCountMapperVer02
 		for (String pattern : this.patternsToSkip ) {
 			line = line.replaceAll(pattern, "" );
 		}
+		
 		StringTokenizer itr = new StringTokenizer( line );
-		/*
-		List<String> tokens = new ArrayList<>();
-
-		String[] values = line.split(" ");
-
-		if(values.length > n) {
-			String[] result = ArrayUtils.subarray(values, 0, n);
-
-			int nGramasLinha = result.length +1;
-		}if (values.length == n) {
-			context.write( this.word, WordCountMapperVer02.one);
-			context.getCounter( WordCountUtils.Statistics.TotalWords ).increment( 1 );
-		}*/
-
-
-		List<String> words = new ArrayList<>();
-
+		
 		while ( itr.hasMoreTokens() ) {
-			String w = itr.nextToken();
+			this.word.set( itr.nextToken() );
+			context.write( this.word, WordCountMapperVer02.one);
 			
-
-			if(words.size() == n) {
-				words.remove(0);
-			}
-
-			words.add(w);
-
-			if(words.size() == n) {
-				String combinedText = String.join(" ", words);
-				this.word.set( combinedText );
-				context.write( this.word, WordCountMapperVer02.one);
-				context.getCounter( WordCountUtils.Statistics.TotalWords ).increment( 1 );
-			}
-			
-	
-			//context.write( this.word, WordCountMapperVer02.one);
-			
-			//context.getCounter( WordCountUtils.Statistics.TotalWords ).increment( 1 );
+			context.getCounter( WordCountUtils.Statistics.TotalWords ).increment( 1 );
 		}
 	}
 	
@@ -174,7 +129,7 @@ public class WordCountMapperVer02
 
 		if ( log.isInfoEnabled() ) {
 			String msg = String.format( "%s#cleanup(%s) called", WordCountMapperVer02.class.getSimpleName(), context.getJobName() );
-
+    		
 			log.info( msg );
     		System.out.printf( "[INFO] %s\n", msg );
 		}

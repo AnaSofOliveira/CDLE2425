@@ -13,7 +13,7 @@ function showMessage() {
 #
 # Hadoop configuration files
 #
-CFG="-conf confWordCount-Debug.xml -conf confWordCount-Job.xml -conf confWordCount-WordCount.xml"
+CFG="-conf confWordCount-Debug.xml -conf confWordCount-Job.xml"
 for conf in "$@"; do
 	CFG="${CFG} ${conf}"
 done
