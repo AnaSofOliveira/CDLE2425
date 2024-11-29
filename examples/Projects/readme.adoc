@@ -1,6 +1,6 @@
 = Large-Scale Data Computation course examples
 
-== Winter Semester 2020/2021
+== Winter Semester 2024/2025
 
 The examples are organized in 7 different categories:
 
@@ -11,6 +11,8 @@ The examples are organized in 7 different categories:
 . Configuration
 . MapReduce
 . OpenCV
+. Python
+. Spark
 
 Each category is composed of several examples (projects). However, each project has an unique name that has the form *Ex-nn*, where *nn* represents a number. For example, the first project within the category *Temperatures* is *Ex01-Temperatures-01*. For some projects the last letters in the name represent the version/evolution of the example.
 
@@ -57,7 +59,7 @@ The main project definitions are kept in the file pom.xml:
     <hadoop.version>3.1.2</hadoop.version>
     <junit.version>4.13</junit.version>
     <mrunit.version>1.1.0</mrunit.version>
-    <opencv.version>3.2.0-0</opencv.version>
+    <opencv.version>4.9.0-0</opencv.version>
     <examples-version>2020.2021.SemInv</examples-version>
   </properties>	
   <modules>

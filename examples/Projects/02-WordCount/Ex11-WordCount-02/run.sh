@@ -25,7 +25,8 @@ _USER=${USER}
 
 export HADOOP_USER_NAME=${_USER}
 
-CORPUS_NAME=gutenberg-small
+# CORPUS_NAME=gutenberg-small
+CORPUS_NAME=gutenberg-mixed
 
 #
 # Input files

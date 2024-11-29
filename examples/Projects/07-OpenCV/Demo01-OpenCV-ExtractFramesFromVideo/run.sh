@@ -4,8 +4,12 @@ LibraryPath="../NativeLibs"
 
 JarFile="./target/Demo01-OpenCV-ExtractFramesFromVideo-2020.2021.SemInv.jar"
 
-Input="../../../input/videos/movie1.mp4"
-Output="../../../output/OpenCV/movie"
+InputName=faces
+#InputName=movie1
+#InputName=pool
+
+Input="../../../input/videos/${InputName}.mp4"
+Output="../../../output/OpenCV/${InputName}"
 
 mkdir -p ${Output}
 

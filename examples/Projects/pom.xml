@@ -21,7 +21,7 @@
     <junit.version>4.13</junit.version>
     <mrunit.version>1.1.0</mrunit.version>
 
-    <opencv.version>4.5.1-2</opencv.version>
+    <opencv.version>4.9.0-0</opencv.version>
   </properties>
 
   <modules>
@@ -33,5 +33,7 @@
     <module>06-MapReduce</module>
     <module>07-OpenCV</module>
     <module>AP1-WordCount</module>
+    <module>AP2-WordCount</module>
+    <module>ProjetoFinal</module>
   </modules>
 </project>
