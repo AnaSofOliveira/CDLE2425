@@ -20,6 +20,7 @@
 
   <modules>
     <module>AP2-Ex2a-WordCountCombiners</module>
+    <module>AP2-Ex2E3-WordCountNGramas</module>
     <module>Ex12-WordCount-02-Lib</module>
   </modules>
 </project>
