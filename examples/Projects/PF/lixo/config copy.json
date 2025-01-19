@@ -1,5 +1,0 @@
-{
-    "log_level": "INFO",
-    "reducers": "3",
-    "codec": "org.apache.hadoop.io.compress.GzipCodec"
-}
