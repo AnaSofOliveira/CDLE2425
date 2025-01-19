@@ -80,7 +80,8 @@ else
 fi
 
 
-PYTHON_BIN=~/.local/share/pipx/venvs/mrjob/bin/python
+#PYTHON_BIN=~/.local/share/pipx/venvs/mrjob/bin/python
+PYTHON_BIN=python3
 
 PYTHON_SRC="./src"
 

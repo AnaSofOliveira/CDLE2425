@@ -1,0 +1,16 @@
+{
+    "runners":{
+       "hadoop":{
+          "jobconf":{
+             "mapreduce.job.reduces":"2"
+          }
+       },
+       "local":{
+          "jobconf":{
+             "mapreduce.job.reduces":"2",
+             "mapreduce.output.fileoutputformat.compress":"true",
+             "mapreduce.output.fileoutputformat.compress.codec":"org.apache.hadoop.io.compress.GzipCodec"
+          }
+       }
+    }
+ }
