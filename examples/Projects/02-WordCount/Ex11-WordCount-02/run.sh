@@ -13,7 +13,7 @@ function showMessage() {
 #
 # Hadoop configuration files
 #
-CFG="-conf confWordCount-Debug.xml -conf confWordCount-Job.xml"
+CFG="-conf confWordCount-Debug.xml -conf confWordCount-Job.xml -conf confWordCount-WordCount.xml"
 for conf in "$@"; do
 	CFG="${CFG} ${conf}"
 done
@@ -25,7 +25,8 @@ _USER=${USER}
 
 export HADOOP_USER_NAME=${_USER}
 
-CORPUS_NAME=gutenberg-small
+# CORPUS_NAME=gutenberg-small
+CORPUS_NAME=gutenberg-mixed
 
 #
 # Input files

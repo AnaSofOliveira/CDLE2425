@@ -33,7 +33,10 @@ public class WordCountCombinerVer02
     		String msg = String.format( "%s#setup(%s) called", WordCountCombinerVer02.class.getSimpleName(), context.getJobName() );
     		
     		log.info( msg );
+
+			log.error("---------------test------------------");
     		System.out.printf( "[INFO] %s\n", msg );
+			System.out.printf( "[INFO] %s\n", "---------------test------------------" );
 		}
     	super.setup( context );
 	}
@@ -61,6 +64,7 @@ public class WordCountCombinerVer02
 			msg = String.format( "%s#cleanup(%s) called", WordCountCombinerVer02.class.getSimpleName(), context.getJobName() );
 			
 			log.info( msg );
+			
     		System.out.printf( "[INFO] %s\n", msg );
 		}
 		

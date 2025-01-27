@@ -6,9 +6,12 @@
 		<value>false</value>
 		<!-- <value>false</value> -->
 	</property>
-	
 	<property>
 		<name>wordcount.skip.patterns</name>
 		<value>true</value>
+	</property>
+	<property>
+		<name>wordcount.case.ngram.size</name>
+		<value>15</value>
 	</property>
 </configuration>

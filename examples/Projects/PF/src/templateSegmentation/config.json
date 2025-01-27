@@ -1,0 +1,18 @@
+{
+    "runners":{
+       "hadoop":{
+          "jobconf":{
+             "mapreduce.job.reduces":"3",
+             "mapreduce.input.fileinputformat.split.minsize":"134217728"
+          }
+       },
+       "local":{
+          "jobconf":{
+             "mapreduce.job.reduces":"3",
+             "mapreduce.output.fileoutputformat.compress":"true",
+             "mapreduce.output.fileoutputformat.compress.codec":"org.apache.hadoop.io.compress.GzipCodec",
+             "mapreduce.input.fileinputformat.split.minsize":"134217728"
+          }
+       }
+    }
+ }

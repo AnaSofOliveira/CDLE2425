@@ -5,11 +5,13 @@ set LibraryPath=..\NativeLibs
 
 set JarFile=.\target\Demo01-OpenCV-ExtractFramesFromVideo-2020.2021.SemInv.jar
 
-rem set Input=..\..\..\input\videos\faces.mp4
-rem set Input=..\..\..\input\videos\movie1.mp4
-set Input=..\..\..\input\videos\pool.mp4
+rem set InputName=faces
+rem set InputName=movie1
+set InputName=pool
 
-set Output=..\..\..\output\OpenCV\movie
+set Input=..\..\..\input\videos\%InputName%.mp4
+
+set Output=..\..\..\output\OpenCV\%InputName%
 
 mkdir %Output%
 
